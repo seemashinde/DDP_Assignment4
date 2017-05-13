@@ -1,0 +1,88 @@
+---
+title: "Coursera DDP Week4 Assignment"
+author: "Seema"
+date: "May 13, 2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Tennis tournament Analysis
+
+- Tennis game analysis of first served games in 2013
+
+
+## Data used for analysis
+
+- Austrellian Open Men
+- Austrellian Open Women
+- French Open Men
+- French Open Women
+- US Open Men
+- US Open Women
+- Wimbledon Open Men
+- Wimbledon Open Women
+
+
+
+```{r, echo=FALSE}
+mydata = read.csv("Data/Tennis-Major-Tournaments-Match-Statistics/AusOpen-men-2013.csv")
+
+
+```
+
+## Data Snapshot
+
+```{r tplot}
+
+library(ggplot2)
+
+mydata2 = (mydata[1:10])
+    
+    data.frame(mydata2)
+    
+    mydata2$R1<- ifelse(mydata2$FSP.1>mydata2$FSP.2 
+                        & mydata2$FSW.1> mydata2$FSW.2, 1, 0)
+    
+    
+    mydata2$FinalRes<- ifelse(mydata2$Result ==  mydata2$R1, 1, 0)
+    
+    mydata2$R1<- ifelse(mydata2$FSP.1>mydata2$FSP.2 
+                        & mydata2$FSW.1> mydata2$FSW.2, 1, 0)
+    
+    
+    mydata2$FinalRes<- ifelse(mydata2$Result ==  mydata2$R1, 1, 0)
+    
+    fsw <- sum(mydata2$FinalRes)
+    fsl <- sum(mydata2$FinalRes == 0)
+    
+    tot <- length(mydata2$FinalRes)
+    
+    
+    bartable <- c (tot,fsw,fsl)
+    
+```
+## Plot 
+
+```{r showplot}
+barplot(bartable, 
+            ylab='Count of Matches',
+            xlab='Category',
+            legend = c('Total Matches','First served won','First Served lost'), 
+            main="First Served data analysis",
+            col=c("orange", "pink", "violet"))
+
+```
+
+## Summary of 2013 matches
+
+<center>
+<img src="aom.png" width="600"></img>
+
+## Thank u
+
+<center>
+<img src="thanku.jpg" width="600"></img>
